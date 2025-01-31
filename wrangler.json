@@ -12,7 +12,7 @@
   "pages_build_output_dir": ".vercel/output/static",
   "observability": {
     "enabled": true
-  }
+  },
   /**
    * Smart Placement
    * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
@@ -25,6 +25,14 @@
    * databases, object storage, AI inference, real-time communication and more.
    * https://developers.cloudflare.com/workers/runtime-apis/bindings/
    */
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio-db",
+      "database_id": "7a1f657b-bef4-40b9-a079-81ad249ce28d",
+      "preview_database_id": "DB"
+    }
+  ]
 
   /**
    * Environment Variables
