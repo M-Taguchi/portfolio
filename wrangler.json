@@ -30,7 +30,8 @@
       "binding": "DB",
       "database_name": "portfolio-db",
       "database_id": "7a1f657b-bef4-40b9-a079-81ad249ce28d",
-      "preview_database_id": "DB"
+      "preview_database_id": "DB",
+      "migrations_dir": "db/migrations",
     }
   ]
 
