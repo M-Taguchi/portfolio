@@ -1,6 +1,7 @@
 import { D1Database } from '@cloudflare/workers-types';
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
+import helloHandlers from './_hello/get'
 
 export const runtime = 'edge';
 
@@ -17,17 +18,16 @@ type Bindings = {
     DB: D1Database;
 }
 
-const app = new Hono<{ Bindings: Bindings}>().basePath('/api')
+const app = new Hono<{ Bindings: Bindings}>().basePath('/api');
 
-app.get("/query/customers", async (c) => {
-    const { results } = await process.env.DB.prepare("SELECT * FROM customers").all()
-    return c.json(results)
-})
+app.route("/hello", helloHandlers);
 
-app.get('/hello', (c) => {
-  return c.json({
-    message: 'Hello Next.js!',
-  })
-})
+// app.get("/query/customers", async (c) => {
+//     const { results } = await process.env.DB.prepare("SELECT * FROM customers").all()
+//     return c.json(results)
+// })
 
 export const GET = handle(app)
+export const POST = handle(app)
+export const PUT = handle(app)
+export const DELETE = handle(app)
