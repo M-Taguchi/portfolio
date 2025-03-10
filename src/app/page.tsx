@@ -15,7 +15,7 @@ type PortfolioItem = {
 // サンプルデータ
 const portfolioItems: PortfolioItem[] = [
   { id: 1, title: "自己紹介", link: "/user", x: 20, y: 30 },
-  { id: 2, title: "プロジェクト2", link: "/user", x: 50, y: 60 },
+  { id: 2, title: "ブログ", link: "/blog", x: 50, y: 60 },
   { id: 3, title: "プロジェクト3", link: "/user", x: 80, y: 40 },
   { id: 4, title: "プロジェクト4", link: "/user", x: 30, y: 70 },
   { id: 5, title: "プロジェクト5", link: "/user", x: 70, y: 20 },

@@ -1,5 +1,7 @@
 import { db } from "../../_common/db"
+import { userTable } from "../../../../../db/schema"
 
 export const getUserProfile = async() => {
-    const { results } = await db.prepare("SELECT * FROM profile").first();
+    const result = await db.select().from(userTable).execute();
+    return result;
 }
