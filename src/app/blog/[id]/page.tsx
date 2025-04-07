@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { ArrowLeft, Calendar, Star, Tag } from "lucide-react"
 
+export const runtime = 'edge';
+
 // ブログ記事のモックデータ
 const blogPosts = [
   {
@@ -120,8 +122,13 @@ const blogPosts = [
   },
 ]
 
-export default function BlogPost({ params }: { params: { id: string } }) {
-  const postId = Number.parseInt(params.id)
+export default async function BlogPost({
+  params
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params;
+  const postId = parseInt(id, 10)
   const post = blogPosts.find((post) => post.id === postId)
 
   if (!post) {

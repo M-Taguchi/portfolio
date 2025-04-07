@@ -15,16 +15,16 @@ type Props = {
 
 export const UserDetail = ({ item }: Props) => {
   const { back } = useRouter();
-    return (
-        <Dialog open={true} onOpenChange={back}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>{item.title}</DialogTitle>
-          </DialogHeader>
-          <div>
-            {item.content}
-          </div>
-        </DialogContent>
-      </Dialog>
-    )
+  return (
+      <Dialog open={true} onOpenChange={back}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>{item.title}</DialogTitle>
+        </DialogHeader>
+        <div>
+          {item.content}
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
 };

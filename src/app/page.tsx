@@ -1,5 +1,3 @@
-"use client"
-
 import { Star } from "@/components/ui/star"
 import Link from "next/link"
 

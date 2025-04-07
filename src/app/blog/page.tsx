@@ -1,40 +1,51 @@
 import Link from "next/link"
 import { ArrowLeft, Calendar } from "lucide-react"
 import { Star } from "@/components/ui/star"
+import { InferResponseType } from "hono/client";
+import { client } from "@/lib/hono";
+import { fetcher } from "@/lib/utils";
+
+export const dynamic = "force-dynamic";
+export const runtime = 'edge';
 
 // ブログ記事のモックデータ
-const blogPosts = [
-  {
-    id: 1,
-    title: "Next.jsでポートフォリオサイトを作る方法",
-    date: "2023-10-15",
-    excerpt: "Next.jsを使って素敵なポートフォリオサイトを作成する方法を紹介します。",
-    category: "Web開発",
-  },
-  {
-    id: 2,
-    title: "Tailwind CSSでスタイリングを効率化",
-    date: "2023-09-28",
-    excerpt: "Tailwind CSSを使ったスタイリングの効率化について解説します。",
-    category: "CSS",
-  },
-  {
-    id: 3,
-    title: "フロントエンド開発のベストプラクティス",
-    date: "2023-09-10",
-    excerpt: "現代のフロントエンド開発におけるベストプラクティスをまとめました。",
-    category: "フロントエンド",
-  },
-  {
-    id: 4,
-    title: "React Hooksの使い方と実践例",
-    date: "2023-08-22",
-    excerpt: "React Hooksの基本的な使い方と実践的な例を紹介します。",
-    category: "React",
-  },
-]
+// const blogPosts = [
+//   {
+//     id: 1,
+//     title: "Next.jsでポートフォリオサイトを作る方法",
+//     date: "2023-10-15",
+//     excerpt: "Next.jsを使って素敵なポートフォリオサイトを作成する方法を紹介します。",
+//     category: "Web開発",
+//   },
+//   {
+//     id: 2,
+//     title: "Tailwind CSSでスタイリングを効率化",
+//     date: "2023-09-28",
+//     excerpt: "Tailwind CSSを使ったスタイリングの効率化について解説します。",
+//     category: "CSS",
+//   },
+//   {
+//     id: 3,
+//     title: "フロントエンド開発のベストプラクティス",
+//     date: "2023-09-10",
+//     excerpt: "現代のフロントエンド開発におけるベストプラクティスをまとめました。",
+//     category: "フロントエンド",
+//   },
+//   {
+//     id: 4,
+//     title: "React Hooksの使い方と実践例",
+//     date: "2023-08-22",
+//     excerpt: "React Hooksの基本的な使い方と実践的な例を紹介します。",
+//     category: "React",
+//   },
+// ]
 
-export default function BlogPage() {
+const url = client.api.blog.$url();
+type ResType = InferResponseType<typeof client.api.blog.$get>;
+
+export default async function BlogPage() {
+  const blogPosts = await fetcher<ResType>(url);
+  // console.log(blogPosts);
   return (
     <div className="min-h-screen bg-[#0a0e1a] text-white p-6">
       <div className="max-w-4xl mx-auto">
@@ -60,13 +71,13 @@ export default function BlogPage() {
                   </span>
                   <div className="flex items-center text-gray-400 text-sm">
                     <Calendar size={14} className="mr-1" />
-                    {post.date}
+                    {post.createdAt}
                   </div>
                 </div>
                 <h2 className="text-xl font-semibold mb-3 group-hover:text-yellow-300 transition-colors">
                   {post.title}
                 </h2>
-                <p className="text-gray-300 text-sm">{post.excerpt}</p>
+                <p className="text-gray-300 text-sm">{post.category}</p>
                 <div className="mt-4 text-yellow-400 text-sm font-medium flex justify-end">続きを読む →</div>
               </div>
             </Link>

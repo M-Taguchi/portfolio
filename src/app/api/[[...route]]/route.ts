@@ -2,11 +2,16 @@ import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
 import helloHandlers from './_hello'
 import userHandlers from './_user'
+import blogHandlers from './_blog'
 import { Bindings } from '../_common/db';
 
 export const runtime = 'edge';
 
-const app = new Hono<{ Bindings: Bindings}>().basePath('/api').route("/hello", helloHandlers).route("/user", userHandlers)
+const app = new Hono<{ Bindings: Bindings}>()
+.basePath('/api')
+.route("/hello", helloHandlers)
+.route("/user", userHandlers)
+.route("/blog", blogHandlers);
 
 // app.get("/query/customers", async (c) => {
 //     const { results } = await process.env.DB.prepare("SELECT * FROM customers").all()
