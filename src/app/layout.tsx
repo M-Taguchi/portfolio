@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Star } from "@/components/ui/star"
 import { Random } from "@/common/random"
+import Header from "@/components/ui/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +43,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
+        <div className="relative w-full h-screen bg-gray-900 overflow-auto">
           {backgroundItems.map((item) => (
             <Star
               key={item.id}
@@ -50,6 +51,7 @@ export default function RootLayout({
               style={{ left: `${item.x}%`, top: `${item.y}%`, width: `${item.w}px`, height: `${item.h}px` }}
             />
           ))}
+          <Header />
           {children}
         </div>
       </body>

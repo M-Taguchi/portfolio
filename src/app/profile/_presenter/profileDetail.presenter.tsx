@@ -10,9 +10,9 @@ type Props = {
 }
 
 
-export const UserDetail = ({ item }: Props) => {
+export const ProfileDetail = ({ item }: Props) => {
   return (
-    <div className="min-h-screen bg-[#0a0e1a] text-white p-6">
+    <div className="min-h-screen text-white p-6">
     <div className="max-w-4xl mx-auto">
     <div className="flex items-center justify-center mb-8">
       <h1 className="text-3xl font-bold text-center text-yellow-300 flex items-center">

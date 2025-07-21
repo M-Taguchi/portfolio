@@ -16,3 +16,19 @@ export const getBlogPostById = async (id: number) => {
     const result = await db.select().from(blogTable).where(eq(blogTable.id, id)).execute();
     return result[0];
 }
+
+export const updateBlogPost = async (id: number, data: { title: string; content: string }) => {
+    try {
+        const result = await db.update(blogTable)
+            .set({
+                title: data.title,
+                content: data.content
+            })
+            .where(eq(blogTable.id, id))
+            .execute();
+        return result;
+    } catch (error) {
+        console.error("Error updating blog post:", error);
+        throw new Error("Failed to update blog post");
+    }
+};

@@ -1,5 +1,5 @@
 import { InferResponseType } from "hono/client";
-import { UserDetail } from "./_presenter/userDetail.presenter"
+import { ProfileDetail } from "./_presenter/profileDetail.presenter"
 import { client } from "@/lib/hono";
 import { fetcher } from "@/lib/utils";
 
@@ -10,13 +10,13 @@ export const runtime = 'edge';
 const url = client.api.profile.$url();
 export type ProfileDetailResType = InferResponseType<typeof client.api.profile.$get>;
 
-export default async function UserContainer() {
+export default async function ProfileContainer() {
     const data = await fetcher<ProfileDetailResType>(url);
     const item = {
         title: "Who am I?",
-        content: data.message
+        content: data?.message || "プロフィール情報を取得できなかったのだ..."
     }
     return (
-        <UserDetail item={item} />
+        <ProfileDetail item={item} />
     )
 }
